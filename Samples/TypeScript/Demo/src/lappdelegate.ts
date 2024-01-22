@@ -12,9 +12,10 @@ import { LAppLive2DManager } from './lapplive2dmanager';
 import { LAppPal } from './lapppal';
 import { LAppTextureManager } from './lapptexturemanager';
 import { LAppView } from './lappview';
-import { canvas, gl } from './lappglmanager';
 
+export let canvas: HTMLCanvasElement = null;
 export let s_instance: LAppDelegate = null;
+export let gl: WebGLRenderingContext = null;
 export let frameBuffer: WebGLFramebuffer = null;
 
 /**
@@ -51,15 +52,32 @@ export class LAppDelegate {
    * APPに必要な物を初期化する。
    */
   public initialize(): boolean {
-    // キャンバスを DOM に追加
-    document.body.appendChild(canvas);
-
+    // キャンバスの作成
+    canvas = document.createElement('canvas');
     if (LAppDefine.CanvasSize === 'auto') {
       this._resizeCanvas();
     } else {
       canvas.width = LAppDefine.CanvasSize.width;
       canvas.height = LAppDefine.CanvasSize.height;
     }
+
+    // glコンテキストを初期化
+    // @ts-ignore
+    gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+
+    if (!gl) {
+      alert('Cannot initialize WebGL. This browser does not support.');
+      gl = null;
+
+      document.body.innerHTML =
+        'This browser does not support the <code>&lt;canvas&gt;</code> element.';
+
+      // gl初期化失敗
+      return false;
+    }
+
+    // キャンバスを DOM に追加
+    document.body.appendChild(canvas);
 
     if (!frameBuffer) {
       frameBuffer = gl.getParameter(gl.FRAMEBUFFER_BINDING);
@@ -73,15 +91,15 @@ export class LAppDelegate {
 
     if (supportTouch) {
       // タッチ関連コールバック関数登録
-      canvas.addEventListener('touchstart', onTouchBegan, { passive: true });
-      canvas.addEventListener('touchmove', onTouchMoved, { passive: true });
-      canvas.addEventListener('touchend', onTouchEnded, { passive: true });
-      canvas.addEventListener('touchcancel', onTouchCancel, { passive: true });
+      canvas.ontouchstart = onTouchBegan;
+      canvas.ontouchmove = onTouchMoved;
+      canvas.ontouchend = onTouchEnded;
+      canvas.ontouchcancel = onTouchCancel;
     } else {
       // マウス関連コールバック関数登録
-      canvas.addEventListener('mousedown', onClickBegan, { passive: true });
-      canvas.addEventListener('mousemove', onMouseMoved, { passive: true });
-      canvas.addEventListener('mouseup', onClickEnded, { passive: true });
+      canvas.onmousedown = onClickBegan;
+      canvas.onmousemove = onMouseMoved;
+      canvas.onmouseup = onClickEnded;
     }
 
     // AppViewの初期化
@@ -100,6 +118,11 @@ export class LAppDelegate {
     this._resizeCanvas();
     this._view.initialize();
     this._view.initializeSprite();
+
+    // キャンバスサイズを渡す
+    const viewport: number[] = [0, 0, canvas.width, canvas.height];
+
+    gl.viewport(viewport[0], viewport[1], viewport[2], viewport[3]);
   }
 
   /**
@@ -271,9 +294,8 @@ export class LAppDelegate {
    * Resize the canvas to fill the screen.
    */
   private _resizeCanvas(): void {
-    canvas.width = canvas.clientWidth * window.devicePixelRatio;
-    canvas.height = canvas.clientHeight * window.devicePixelRatio;
-    gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
   }
 
   _cubismOption: Option; // Cubism SDK Option

@@ -3,7 +3,7 @@ var path = require('path');
 
 module.exports = {
   mode: 'production',
-  target: ['web', 'es6'],
+  target: ['web', 'es5'],
   entry: './src/main.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),

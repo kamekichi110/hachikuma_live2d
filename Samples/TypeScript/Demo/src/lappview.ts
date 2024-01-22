@@ -9,8 +9,7 @@ import { CubismMatrix44 } from '@framework/math/cubismmatrix44';
 import { CubismViewMatrix } from '@framework/math/cubismviewmatrix';
 
 import * as LAppDefine from './lappdefine';
-import { LAppDelegate } from './lappdelegate';
-import { canvas, gl } from './lappglmanager';
+import { canvas, gl, LAppDelegate } from './lappdelegate';
 import { LAppLive2DManager } from './lapplive2dmanager';
 import { LAppPal } from './lapppal';
 import { LAppSprite } from './lappsprite';
@@ -177,10 +176,7 @@ export class LAppView {
    * @param pointY スクリーンY座標
    */
   public onTouchesBegan(pointX: number, pointY: number): void {
-    this._touchManager.touchesBegan(
-      pointX * window.devicePixelRatio,
-      pointY * window.devicePixelRatio
-    );
+    this._touchManager.touchesBegan(pointX, pointY);
   }
 
   /**
@@ -193,10 +189,7 @@ export class LAppView {
     const viewX: number = this.transformViewX(this._touchManager.getX());
     const viewY: number = this.transformViewY(this._touchManager.getY());
 
-    this._touchManager.touchesMoved(
-      pointX * window.devicePixelRatio,
-      pointY * window.devicePixelRatio
-    );
+    this._touchManager.touchesMoved(pointX, pointY);
 
     const live2DManager: LAppLive2DManager = LAppLive2DManager.getInstance();
     live2DManager.onDrag(viewX, viewY);
@@ -228,12 +221,7 @@ export class LAppView {
       live2DManager.onTap(x, y);
 
       // 歯車にタップしたか
-      if (
-        this._gear.isHit(
-          pointX * window.devicePixelRatio,
-          pointY * window.devicePixelRatio
-        )
-      ) {
+      if (this._gear.isHit(pointX, pointY)) {
         live2DManager.nextScene();
       }
     }

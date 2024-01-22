@@ -7,45 +7,29 @@
 
 import { LAppDelegate } from './lappdelegate';
 import * as LAppDefine from './lappdefine';
-import { LAppGlManager } from './lappglmanager';
 
 /**
  * ブラウザロード後の処理
  */
-window.addEventListener(
-  'load',
-  (): void => {
-    // Initialize WebGL and create the application instance
-    if (
-      !LAppGlManager.getInstance() ||
-      !LAppDelegate.getInstance().initialize()
-    ) {
-      return;
-    }
+window.onload = (): void => {
+  // create the application instance
+  if (LAppDelegate.getInstance().initialize() == false) {
+    return;
+  }
 
-    LAppDelegate.getInstance().run();
-  },
-  { passive: true }
-);
+  LAppDelegate.getInstance().run();
+};
 
 /**
  * 終了時の処理
  */
-window.addEventListener(
-  'beforeunload',
-  (): void => LAppDelegate.releaseInstance(),
-  { passive: true }
-);
+window.onbeforeunload = (): void => LAppDelegate.releaseInstance();
 
 /**
  * Process when changing screen size.
  */
-window.addEventListener(
-  'resize',
-  () => {
-    if (LAppDefine.CanvasSize === 'auto') {
-      LAppDelegate.getInstance().onResize();
-    }
-  },
-  { passive: true }
-);
+window.onresize = () => {
+  if (LAppDefine.CanvasSize === 'auto') {
+    LAppDelegate.getInstance().onResize();
+  }
+};
