@@ -1,3 +1,0 @@
-log file
-type: text;
-value: null;
