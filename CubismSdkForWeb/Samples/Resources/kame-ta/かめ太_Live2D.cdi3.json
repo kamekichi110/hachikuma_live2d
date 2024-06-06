@@ -1,0 +1,140 @@
+{
+	"Version": 3,
+	"Parameters": [
+		{
+			"Id": "ParamAngleX",
+			"GroupId": "ParamGroup",
+			"Name": "角度 X"
+		},
+		{
+			"Id": "ParamAngleY",
+			"GroupId": "ParamGroup",
+			"Name": "角度 Y"
+		},
+		{
+			"Id": "ParamEyeOpen",
+			"GroupId": "ParamGroup2",
+			"Name": "目　開閉"
+		},
+		{
+			"Id": "Param3",
+			"GroupId": "ParamGroup2",
+			"Name": "pokan"
+		},
+		{
+			"Id": "Param",
+			"GroupId": "ParamGroup2",
+			"Name": "pokan 開閉"
+		},
+		{
+			"Id": "Param4",
+			"GroupId": "ParamGroup2",
+			"Name": "smile"
+		},
+		{
+			"Id": "Param5",
+			"GroupId": "ParamGroup2",
+			"Name": "smile 開閉"
+		},
+		{
+			"Id": "ParamMouthForm",
+			"GroupId": "ParamGroup3",
+			"Name": "口　変形"
+		},
+		{
+			"Id": "ParamMouthOpenY",
+			"GroupId": "ParamGroup3",
+			"Name": "口　開閉"
+		},
+		{
+			"Id": "ParamBodyAngleX",
+			"GroupId": "ParamGroup4",
+			"Name": "体の回転　X"
+		},
+		{
+			"Id": "ParamBodyAngleY",
+			"GroupId": "ParamGroup4",
+			"Name": "体の回転　Y"
+		},
+		{
+			"Id": "Param2",
+			"GroupId": "",
+			"Name": "しっぽ 揺れ"
+		}
+	],
+	"ParameterGroups": [
+		{
+			"Id": "ParamGroup",
+			"GroupId": "",
+			"Name": "顔 角度"
+		},
+		{
+			"Id": "ParamGroup2",
+			"GroupId": "",
+			"Name": "目"
+		},
+		{
+			"Id": "ParamGroup3",
+			"GroupId": "",
+			"Name": "口"
+		},
+		{
+			"Id": "ParamGroup4",
+			"GroupId": "",
+			"Name": "体 角度"
+		},
+		{
+			"Id": "ParamGroup5",
+			"GroupId": "",
+			"Name": "揺れ"
+		}
+	],
+	"Parts": [
+		{
+			"Id": "root",
+			"Name": "root"
+		},
+		{
+			"Id": "body",
+			"Name": "body"
+		},
+		{
+			"Id": "tail",
+			"Name": "tail"
+		},
+		{
+			"Id": "legs",
+			"Name": "legs"
+		},
+		{
+			"Id": "face",
+			"Name": "face"
+		},
+		{
+			"Id": "mouse",
+			"Name": "mouse"
+		},
+		{
+			"Id": "eye",
+			"Name": "eye"
+		},
+		{
+			"Id": "neck",
+			"Name": "neck"
+		}
+	],
+	"CombinedParameters": [
+		[
+			"ParamAngleX",
+			"ParamAngleY"
+		],
+		[
+			"ParamMouthForm",
+			"ParamMouthOpenY"
+		],
+		[
+			"ParamBodyAngleX",
+			"ParamBodyAngleY"
+		]
+	]
+}
