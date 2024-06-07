@@ -1,0 +1,26 @@
+{
+	"Version": 3,
+	"FileReferences": {
+		"Moc": "かめ太_Live2D.moc3",
+		"Textures": [
+			"かめ太_Live2D.4096/texture_00.png",
+			"かめ太_Live2D.4096/texture_01.png"
+		],
+		"Physics": "かめ太_Live2D.physics3.json",
+		"DisplayInfo": "かめ太_Live2D.cdi3.json"
+	},
+	"Groups": [
+		{
+			"Target": "Parameter",
+			"Name": "EyeBlink",
+			"Ids": [
+				"ParamEyeOpen"
+			]
+		},
+		{
+			"Target": "Parameter",
+			"Name": "LipSync",
+			"Ids": []
+		}
+	]
+}
