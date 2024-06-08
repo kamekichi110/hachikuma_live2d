@@ -13,7 +13,7 @@ const {
 } = Kalidokit;
 
 // Url to Live2D
-const modelUrl = "../models/hiyori/hiyori_pro_t10.model3.json";
+const modelUrl = "../models/かめ太_Live2D/かめ太_Live2D.model3.json";
 
 let currentModel, facemesh;
 
@@ -26,7 +26,7 @@ const videoElement = document.querySelector(".input_video"),
         view: document.getElementById("live2d"),
         autoStart: true,
         backgroundAlpha: 0,
-        backgroundColor: 0xffffff,
+        backgroundColor: 0x00ff00,
         resizeTo: window,
     });
 
