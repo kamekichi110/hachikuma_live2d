@@ -19,7 +19,7 @@ export const FastForwardImageName = 'icon_fastForward.png';
 // モデル定義---------------------------------------------
 // モデルを配置したディレクトリ名の配列
 // ディレクトリ名とmodel3.jsonの名前を一致させておくこと
-export const ModelDir: string[] = ['Kei_basic', 'Kei_vowels', 'kame-ta'];
+export const ModelDir: string[] = ['かめ太_Live2D'];
 
 export const ModelDirSize: number = ModelDir.length;
 
